@@ -2,11 +2,13 @@ import './App.css';
 import React from 'react';
 import { useState, useRef } from 'react';
 
-export default function Stopwatch() {
+export default function alarm() {
   const [startTime, setStartTime] = useState(null);
   const [now, setNow] = useState(null);
+  const [session, setSession] = useState('Session');
   const [secondsPassed, setSecondsPassed] = useState('00');
-  const [minutesPassed, setMinutespassed] = useState(10);
+  const [minutesPassed, setMinutespassed] = useState(25);
+  const [minutesPassed2, setMinutespassed2] = useState(5);
   const microsecondintervalRef = useRef(null);
   const secondintervalRef = useRef(null);
   const minuteintervalRef = useRef(null);
@@ -21,13 +23,9 @@ export default function Stopwatch() {
     }, 1);
   }
 
-  function handleStop() {
-    clearInterval(microsecondintervalRef.current);
-    secondintervalRef.current=0;
-  }
-
-  
+ 
   let microsecondsPassed = 0;
+       
   if (startTime != null && now != null) {
     microsecondsPassed = (now - startTime)/1000;
    }
@@ -43,42 +41,95 @@ export default function Stopwatch() {
       secondintervalRef.current= secondsPassed;
       setMinutespassed(minutesPassed-1);
       minuteintervalRef.current=minutesPassed;
+     
     }
+    if(minutesPassed == 0 && secondsPassed == 0){
+      
+       handleSession();
+       setMinutespassed(minutesPassed2);
+       setSecondsPassed('00');
+       minuteintervalRef.current=minutesPassed2;
+       if(session == 'Break' && minutesPassed >= 1) {
+        setMinutespassed(minutesPassed2-1);
+        minuteintervalRef.current=minutesPassed2;
+         
+      } if(session == 'Break' && minutesPassed == 0 && secondsPassed == 0) {
+        handleReset();
+      }
+        
+      
+     } 
+    }
+
+  function handleStop() {
+    clearInterval(microsecondintervalRef.current);
+    secondintervalRef.current=0;
   }
 
   function handleReset() {
     handleStop()
     setSecondsPassed('00');
-    // secondintervalRef.current= 0;
     setMinutespassed(25);
+    setMinutespassed2(5);
     minuteintervalRef.current=minutesPassed;
+    setSession('Session');
+  }
 
+  function handleSession() {
+    setSession('Break');
+   }
+
+  function handleDown1() {
+    if (minutesPassed > 1 ){
+      setMinutespassed(minutesPassed-1);
+    }    
+  }
+
+  function handleUp1() {
+    if (minutesPassed < 60 ){
+      setMinutespassed(minutesPassed+1);
+    }
+  }
+
+  function handleDown2() {
+    if (minutesPassed2 > 1){
+      setMinutespassed2(minutesPassed2-1);
+    }    
+  }
+
+  function handleUp2() {
+    if (minutesPassed2 < 60 ){
+      setMinutespassed2(minutesPassed2+1);
+    }
   }
 
   
-
-
   return (
     <>
     <h2>25 + 5 Clock</h2>
-    <h3>Break Length</h3>
-    <button onClick={handleUp}>
-        Up
-      </button>
-      <div></div>
-      <button onClick={handleDown}>
-        Down
-      </button>
+
     <h3>Session Length</h3>
-    <button onClick={handleUp}>
+      <button onClick={handleUp1}>
         Up
       </button>
-      <div></div>
-      <button onClick={handleDown}>
-        Down
+      {session == 'Session'?String(minutesPassed).padStart(2, '0'):'00'}
+      <button onClick={handleDown1}>
+       Down
+      </button>
+
+    <h3>Break Length</h3>
+      <button onClick={handleUp2}>
+        Up
+      </button>
+      {String(minutesPassed2).padStart(2, '0') }
+      <button onClick={handleDown2}>
+       Down
       </button>
       
-      <h1>Time passed: {String(minutesPassed).padStart(2, '0')}:{String(secondsPassed).padStart(2, '0')} {microsecondsPassed} </h1>
+      
+  
+      <h3>{session} Length</h3>
+      <h1> {String(minutesPassed).padStart(2, '0')}:{String(secondsPassed).padStart(2, '0')} {microsecondsPassed} </h1>
       <button onClick={handleStart}>
         Start
       </button>
