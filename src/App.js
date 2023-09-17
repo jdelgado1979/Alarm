@@ -12,6 +12,14 @@ export default function alarm() {
   const microsecondintervalRef = useRef(null);
   const secondintervalRef = useRef(null);
   const minuteintervalRef = useRef(null);
+  //const audio = useRef(null);
+
+  var result = 'http://www.simphonics.com/library/WaveFiles/Production%20Wavefiles/FS-98/pjstall.wav';
+  let obj = new Audio(result);
+
+  function handlePlay() {
+    obj.play();
+  }
 
   function handleStart() {
     setStartTime(Date.now());
@@ -20,7 +28,7 @@ export default function alarm() {
     clearInterval(microsecondintervalRef.current);
     microsecondintervalRef.current = setInterval(() => {
       setNow(Date.now());
-    }, 1);
+    }, );
   }
 
  
@@ -44,17 +52,27 @@ export default function alarm() {
      
     }
     if(minutesPassed == 0 && secondsPassed == 0){
-      
+      clearInterval(microsecondintervalRef.current);
+       handlePlay();
        handleSession();
        setMinutespassed(minutesPassed2);
        setSecondsPassed('00');
+       setTimeout(() => {
+        handleStart();
+       }, 3000);
        minuteintervalRef.current=minutesPassed2;
        if(session == 'Break' && minutesPassed >= 1) {
         setMinutespassed(minutesPassed2-1);
         minuteintervalRef.current=minutesPassed2;
          
       } if(session == 'Break' && minutesPassed == 0 && secondsPassed == 0) {
-        handleReset();
+        clearInterval(microsecondintervalRef.current);
+        setMinutespassed('00');
+        setSecondsPassed('00');
+        setTimeout(() => {
+          handleReset();
+         }, 3000);
+        
       }
         
       
