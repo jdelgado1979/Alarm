@@ -1,18 +1,19 @@
 import './App.css';
 import React from 'react';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 export default function alarm() {
   const [startTime, setStartTime] = useState(null);
   const [now, setNow] = useState(null);
   const [session, setSession] = useState('Session');
-  const [secondsPassed, setSecondsPassed] = useState('00');
-  const [minutesPassed, setMinutespassed] = useState(25);
+  const [secondsPassed, setSecondsPassed] = useState(0);
+  const [minutesPassed, setMinutesPassed] = useState(25);
   const [minutesPassed2, setMinutespassed2] = useState(5);
+  const [color, setColor] = useState('black');
   const microsecondintervalRef = useRef(null);
   const secondintervalRef = useRef(null);
   const minuteintervalRef = useRef(null);
-  //const audio = useRef(null);
+  
 
   var result = 'http://www.simphonics.com/library/WaveFiles/Production%20Wavefiles/FS-98/pjstall.wav';
   let obj = new Audio(result);
@@ -21,6 +22,11 @@ export default function alarm() {
     obj.play();
   }
 
+  function handleColor(color) {
+    setColor(color);
+  }
+  
+
   function handleStart() {
     setStartTime(Date.now());
     setNow(Date.now());
@@ -28,84 +34,109 @@ export default function alarm() {
     clearInterval(microsecondintervalRef.current);
     microsecondintervalRef.current = setInterval(() => {
       setNow(Date.now());
-    }, );
+    }, 100);
   }
 
- 
-  let microsecondsPassed = 0;
-       
-  if (startTime != null && now != null) {
-    microsecondsPassed = (now - startTime)/1000;
-   }
 
-   
-  if (microsecondsPassed >= 1) {
-    handleStart()
-    setSecondsPassed('59');
-    setSecondsPassed(secondsPassed-1);
-    secondintervalRef.current= secondsPassed;
-    if (secondsPassed == 0) {
-      setSecondsPassed(59);
-      secondintervalRef.current= secondsPassed;
-      setMinutespassed(minutesPassed-1);
-      minuteintervalRef.current=minutesPassed;
-     
+    let microsecondsPassed = 0;
+    
+    if (startTime != null && now != null) {
+      microsecondsPassed = Math.floor((now - startTime) / 1000);
     }
-    if(minutesPassed == 0 && secondsPassed == 0){
-      clearInterval(microsecondintervalRef.current);
-       handlePlay();
-       handleSession();
-       setMinutespassed(minutesPassed2);
-       setSecondsPassed('00');
-       setTimeout(() => {
-        handleStart();
-       }, 3000);
-       minuteintervalRef.current=minutesPassed2;
-       if(session == 'Break' && minutesPassed >= 1) {
-        setMinutespassed(minutesPassed2-1);
-        minuteintervalRef.current=minutesPassed2;
-         
-      } if(session == 'Break' && minutesPassed == 0 && secondsPassed == 0) {
-        clearInterval(microsecondintervalRef.current);
-        setMinutespassed('00');
-        setSecondsPassed('00');
-        setTimeout(() => {
-          handleReset();
-         }, 3000);
-        
-      }
-        
+    
+    useEffect(() => {
+    if ( minutesPassed === 0) {
+      setMinutesPassed((prevMinutes) => {
+        if (prevMinutes === 0) {
+          handleColor('red');
+        }
+        return prevMinutes;
+      });
       
-     } 
-    }
+     }
+   },  [minutesPassed, color]);
+
+    
+    if (microsecondsPassed >= 1) {
+       handleStart();
+  
+       setSecondsPassed((prevSeconds) => {
+
+        if (prevSeconds === 0) {
+
+          setMinutesPassed((prevMinutes) => {
+            
+            if (prevMinutes === 0) {
+              
+              handleColor('black');
+              handlePlay();
+              handleSession(); 
+              setMinutesPassed(minutesPassed2);
+              setSecondsPassed(0);
+              setTimeout(() => {                
+                handleStart();
+              }, 3000);
+              minuteintervalRef.current=minutesPassed2;
+
+              if(session === 'Break' && prevMinutes === 0) {
+                clearInterval(microsecondintervalRef.current);
+                setMinutesPassed(0);
+                setSecondsPassed(0);
+                setTimeout(() => {
+                  handleReset();
+                 }, 3000);
+                
+              }
+            }
+
+            return prevMinutes-1;
+          
+          });
+
+          setSecondsPassed(59);
+        }  
+        
+        else {
+        
+          secondintervalRef.current= secondsPassed;
+          return prevSeconds - 1;
+         } 
+         
+      });
+      
+      } 
+ 
 
   function handleStop() {
     clearInterval(microsecondintervalRef.current);
-    secondintervalRef.current=0;
+    
   }
 
   function handleReset() {
     handleStop()
-    setSecondsPassed('00');
-    setMinutespassed(25);
+    setSecondsPassed(0);
+    setMinutesPassed(25);
     setMinutespassed2(5);
-    minuteintervalRef.current=minutesPassed;
+    minuteintervalRef.current=25;
     setSession('Session');
+    setColor('black');
   }
+
+ 
 
   function handleSession() {
     setSession('Break');
-   }
+  }
 
   function handleDown1() {
     if (minutesPassed > 1 ){
-      setMinutespassed(minutesPassed-1);
+      setMinutesPassed(minutesPassed-1);
     }    
   }
 
   function handleUp1() {
     if (minutesPassed < 60 ){
-      setMinutespassed(minutesPassed+1);
+      setMinutesPassed(minutesPassed+1);
     }
   }
 
@@ -130,7 +161,7 @@ export default function alarm() {
       <button onClick={handleUp1}>
         Up
       </button>
-      {session == 'Session'?String(minutesPassed).padStart(2, '0'):'00'}
+      {session == 'Session'? String(minutesPassed).padStart(2, '0'):'00'}
       <button onClick={handleDown1}>
        Down
       </button>
@@ -146,8 +177,8 @@ export default function alarm() {
       
       
   
-      <h3>{session} Length</h3>
-      <h1> {String(minutesPassed).padStart(2, '0')}:{String(secondsPassed).padStart(2, '0')} {microsecondsPassed} </h1>
+      <h3 style={{color}}>{session} </h3>
+      <h1 style={{color}}> {String(minutesPassed).padStart(2, '0')}:{String(secondsPassed).padStart(2, '0')} </h1>
       <button onClick={handleStart}>
         Start
       </button>
