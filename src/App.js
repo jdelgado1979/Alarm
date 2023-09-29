@@ -1,4 +1,10 @@
 import './App.css';
+// import img from './images/alarmImage.png';
+import  downbutton from'./images/downButton.png';
+import  upbutton from './images/Upbutton.png';
+import  playbutton from './images/playButton.png';
+import  resetbutton from './images/resetButton.png';
+import  pausebutton from './images/pauseButton.png';
 import React from 'react';
 import { useState, useRef, useEffect } from 'react';
 
@@ -152,42 +158,74 @@ export default function alarm() {
     }
   }
 
+// src={img} alt="clock image"  <div className= "img"></div>
+
+  //background-image: url(./images/alarmImage.png);
+  //background-repeat: no-repeat; 
+  //background-size: 100vh;
   
   return (
     <>
-    <h2>25 + 5 Clock</h2>
+    <div className='one' >
 
-    <h3>Session Length</h3>
-      <button onClick={handleUp1}>
-        Up
+    <h2 className= "title">25 + 5 Clock</h2>
+
+    
+    
+    <div  className= "package" style={{  
+  backgroundImage: `url(${'./images/alarmImage.png'})`}}>
+
+    
+
+     <div className='a'>
+
+    <h3 className= "session">Session Length</h3>
+      <button>
+      <img className= "btUp" onClick={handleUp1} src={upbutton}  alt="an arrow up" />
       </button>
       {session == 'Session'? String(minutesPassed).padStart(2, '0'):'00'}
-      <button onClick={handleDown1}>
-       Down
+      <button >
+      <img className= "btDown" onClick={handleDown1} src={downbutton}  alt="an arrow down" />
       </button>
 
-    <h3>Break Length</h3>
-      <button onClick={handleUp2}>
-        Up
+    </div>
+
+     <div className='b'>
+
+      <h3 className= "sessionTitle" style={{color}}>{session} </h3>
+      <h1 className= "display" style={{color}}> {String(minutesPassed).padStart(2, '0')}:{String(secondsPassed).padStart(2, '0')} </h1>
+      <div className='b1'>
+       <button>
+       <img className= "btStart" onClick={handleStart} src={playbutton}  alt="a play button" />
+       </button>
+       <button >
+       <img className= "btStop" onClick={handleStop} src={pausebutton}  alt="a button to stop the timer" />
+       </button>
+       <button >
+       <img className= "btReset" onClick={handleReset} src={resetbutton}  alt="a button to reset the timer" />
+       </button>
+      </div>
+     </div>
+
+     <div className='c'>
+
+      <h3 className= "breakT">Break Length</h3>
+      <button>
+      <img className= "btUp" onClick={handleUp2} src={upbutton}  alt="an arrow up" />
       </button>
       {String(minutesPassed2).padStart(2, '0') }
-      <button onClick={handleDown2}>
-       Down
+      <button>
+      <img className= "btDown" onClick={handleDown2} src={downbutton}  alt="an arrow down" />
       </button>
       
-      
+      </div>  
   
-      <h3 style={{color}}>{session} </h3>
-      <h1 style={{color}}> {String(minutesPassed).padStart(2, '0')}:{String(secondsPassed).padStart(2, '0')} </h1>
-      <button onClick={handleStart}>
-        Start
-      </button>
-      <button onClick={handleStop}>
-        Stop
-      </button>
-      <button onClick={handleReset}>
-        Reset
-      </button>
+    </div>
+
+    <a href="https://www.vecteezy.com/free-png/up-button">All button PNGs by Vecteezy</a>
+
+   </div>
     </>
   );
 }
+
