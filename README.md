@@ -1,3 +1,7 @@
+Credits:
+
+<a href="https://www.vecteezy.com/free-png/buttons">Buttons PNGs by Vecteezy</a>
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

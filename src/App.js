@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import './App.css';
 // import img from './images/alarmImage.png';
 import  downbutton from'./images/downButton.png';
@@ -229,3 +230,5 @@ export default function alarm() {
   );
 }
 
+=======
+>>>>>>> refs/remotes/origin/main
