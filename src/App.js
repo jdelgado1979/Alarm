@@ -15,7 +15,7 @@ export default function alarm() {
   const [secondsPassed, setSecondsPassed] = useState(0);
   const [minutesPassed, setMinutesPassed] = useState(25);
   const [minutesPassed2, setMinutespassed2] = useState(5);
-  const [color, setColor] = useState('black');
+  const [color, setColor] = useState('white');
   const microsecondintervalRef = useRef(null);
   const secondintervalRef = useRef(null);
   const minuteintervalRef = useRef(null);
@@ -74,7 +74,7 @@ export default function alarm() {
             
             if (prevMinutes === 0) {
               
-              handleColor('black');
+              handleColor('white');
               handlePlay();
               handleSession(); 
               setMinutesPassed(minutesPassed2);
@@ -125,7 +125,7 @@ export default function alarm() {
     setMinutespassed2(5);
     minuteintervalRef.current=25;
     setSession('Session');
-    setColor('black');
+    setColor('white');
   }
 
  
@@ -158,24 +158,15 @@ export default function alarm() {
     }
   }
 
-// src={img} alt="clock image"  <div className= "img"></div>
 
-  //background-image: url(./images/alarmImage.png);
-  //background-repeat: no-repeat; 
-  //background-size: 100vh;
   
   return (
     <>
     <div className='one' >
 
-    <h2 className= "title">25 + 5 Clock</h2>
-
+    <h2 className= "title">25 + 5 Clock</h2>    
     
-    
-    <div  className= "package" style={{  
-  backgroundImage: `url(${'./images/alarmImage.png'})`}}>
-
-    
+    <div  className= "package" >    
 
      <div className='a'>
 
@@ -191,10 +182,11 @@ export default function alarm() {
     </div>
 
      <div className='b'>
-
-      <h3 className= "sessionTitle" style={{color}}>{session} </h3>
-      <h1 className= "display" style={{color}}> {String(minutesPassed).padStart(2, '0')}:{String(secondsPassed).padStart(2, '0')} </h1>
       <div className='b1'>
+       <h3 className= "sessionTitle" style={{color}}>{session} </h3>
+       <h1 className= "display" style={{color}}> {String(minutesPassed).padStart(2, '0')}:{String(secondsPassed).padStart(2, '0')} </h1>
+       </div>
+      <div className='b2'>
        <button>
        <img className= "btStart" onClick={handleStart} src={playbutton}  alt="a play button" />
        </button>
@@ -222,7 +214,7 @@ export default function alarm() {
   
     </div>
 
-    <a href="https://www.vecteezy.com/free-png/up-button">All button PNGs by Vecteezy</a>
+    <a className='d' href="https://www.vecteezy.com/free-png/up-button">All button PNGs by Vecteezy</a>
 
    </div>
     </>

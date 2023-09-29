@@ -3,28 +3,44 @@
 .one {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-items: center;
-  height: 100%;
-  width: 100%;
-  
+  margin-left: 400px;
+  margin-top: 80px;
+  background-image: url(./images/alarmImage.png);
+  background-repeat: no-repeat; 
+  background-size: 150vh;
 
  
 }
 
+.title {
+  font-size: 70px;
+  margin-left: 460px;
+  margin-top: -70px;
+  color: hsl(0, 42%, 52%);
 
+}
 
 .package {
   display: flex;
   align-items: center;
   justify-content: space-evenly; 
  
+  
  
 } 
 
 
 .a {
+  display: flex;
+  flex-direction: column;
   
+  margin-right: 500px;
+  
+}
+
+.session {
+  
+  color: white;
 }
 
 .b {
@@ -33,24 +49,33 @@
 }
 
 .b1 {
+  text-align: center;
+  height:290px;
+  width: 820px;
+  margin-left: -310px;
+  background-color: hsla(42, 100%, 53%, 0.966);
+  border-radius: 10px;
   
+}
+
+.b2 {
+  margin-top: 5px;
   display: flex;
+  
 }
 
 .c {
   
 }
-
-.title {
-
-}
-
-.session {
+.d {
+  margin-left: 510px;
+  margin-top: 70px;
   
 }
+
 
 .btUp {
-  
+  border-radius: 5px;
   height:30px;
   width: 30px;
   
@@ -58,7 +83,7 @@
 }
 
 .btDown {
-  
+  border-radius: 5px;
   height:30px;
   width: 30px;
   
@@ -71,16 +96,19 @@
 
 .sessionTitle {
   font-size: 50px;
+  background-color: hsl(42, 100%, 53%);
   
 }
 
 .display {
   font-size: 70px;
+  background-color: hsl(42, 100%, 53%);
+  
   
 }
 
 .btStart {
-  
+  border-radius: 5px;
   height:50px;
   width: 50px;
   
@@ -88,7 +116,7 @@
 }
 
 .btStop {
-  
+  border-radius: 5px;
   height:50px;
   width: 50px;
   
@@ -96,7 +124,7 @@
 }
 
 .btReset {
-  
+  border-radius: 5px;
   height:50px;
   width: 50px;
   
