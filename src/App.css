@@ -13,10 +13,11 @@
 }
 
 .title {
-  font-size: 70px;
+  font-size: 65px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   margin-left: 460px;
-  margin-top: -70px;
-  color: hsl(0, 42%, 52%);
+  margin-top: -60px;
+  color: hsla(90, 11%, 4%, 0.918);
 
 }
 
@@ -33,14 +34,27 @@
 .a {
   display: flex;
   flex-direction: column;
-  
-  margin-right: 500px;
-  
+  align-items: center;
+  margin-right: 300px;
+  font-weight: bold;
+  font-size: 40px;
+  justify-content: space-around;
+  height: 290px;
+  margin-bottom: 25px;
+}
+.a1 {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 25px;
+  background-color: rgba(34, 34, 34, 0.863);
+  width: 60px;
 }
 
 .session {
-  
-  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  background-color: rgba(78, 77, 77, 0.808);
+  margin-bottom: 90px;
 }
 
 .b {
@@ -50,23 +64,41 @@
 
 .b1 {
   text-align: center;
-  height:290px;
+  height:300px;
   width: 820px;
   margin-left: -310px;
-  background-color: hsla(42, 100%, 53%, 0.966);
+  background-color: hsl(115, 31%, 44%);
   border-radius: 10px;
-  
+  margin-top: -10px;
 }
 
 .b2 {
-  margin-top: 5px;
+ margin-top: 5px;
   display: flex;
   
 }
 
 .c {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 300px;
+  font-weight: bold;
+  font-size: 40px;
+  justify-content: space-around;
+  height: 290px;
+  margin-bottom: 25px;
   
 }
+
+.c1 {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 25px;
+  background-color: rgba(34, 34, 34, 0.863);
+  width: 60px;
+}
+
 .d {
   margin-left: 510px;
   margin-top: 70px;
@@ -75,34 +107,39 @@
 
 
 .btUp {
-  border-radius: 5px;
-  height:30px;
-  width: 30px;
-  
+  border-radius: 10px;
+  height:40px;
+  width: 40px;
+  margin-top: 7px;
   
 }
 
 .btDown {
-  border-radius: 5px;
-  height:30px;
-  width: 30px;
-  
+  border-radius: 10px;
+  height:40px;
+  width: 40px;
+  margin-bottom: 8px;
   
 }
 
 .breakT {
+
+  font-weight: bold;
+  font-size: 20px;
+  background-color: rgba(78, 77, 77, 0.411);
+  margin-bottom: 80px;
   
 }
 
 .sessionTitle {
   font-size: 50px;
-  background-color: hsl(42, 100%, 53%);
+  background-color: hsl(115, 31%, 44%);
   
 }
 
 .display {
   font-size: 70px;
-  background-color: hsl(42, 100%, 53%);
+  background-color: hsl(115, 31%, 44%);
   
   
 }

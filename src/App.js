@@ -168,17 +168,17 @@ export default function alarm() {
     
     <div  className= "package" >    
 
-     <div className='a'>
-
-    <h3 className= "session">Session Length</h3>
-      <button>
+     <div className='a' style={{color}}>
+     <button>
       <img className= "btUp" onClick={handleUp1} src={upbutton}  alt="an arrow up" />
       </button>
-      {session == 'Session'? String(minutesPassed).padStart(2, '0'):'00'}
-      <button >
+     <h3 className= "session">Session Length</h3>
+     <button >
       <img className= "btDown" onClick={handleDown1} src={downbutton}  alt="an arrow down" />
       </button>
-
+      <div className='a1' style={{color}}>
+      {session == 'Session'? String(minutesPassed).padStart(2, '0'):'00'}
+      </div>
     </div>
 
      <div className='b'>
@@ -199,18 +199,20 @@ export default function alarm() {
       </div>
      </div>
 
-     <div className='c'>
+     <div className='c' style={{color}}>
 
-      <h3 className= "breakT">Break Length</h3>
-      <button>
+     <button>
       <img className= "btUp" onClick={handleUp2} src={upbutton}  alt="an arrow up" />
       </button>
-      {String(minutesPassed2).padStart(2, '0') }
+      <h3 className= "breakT">Break Length</h3>      
+      
       <button>
       <img className= "btDown" onClick={handleDown2} src={downbutton}  alt="an arrow down" />
       </button>
-      
-      </div>  
+      <div className='c1' style={{color}}>
+      {String(minutesPassed2).padStart(2, '0') }
+      </div>
+     </div>  
   
     </div>
 
